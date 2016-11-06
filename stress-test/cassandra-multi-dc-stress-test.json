@@ -1,0 +1,69 @@
+{
+  "config": {
+    "phases": [
+      {
+        "duration": 600,
+        "arrivalRate": 100
+      }
+    ],
+    "payload": {
+      "path": "./testdata.csv",
+      "fields": [
+        "key",
+        "value"
+      ]
+    },
+    "plugins": {
+      "statsd": {
+        "host": "localhost",
+        "port": 8125,
+        "prefix": "artillery"
+      }
+    },
+    "environments": {
+      "dc1": {
+        "target": "http://localhost:4500",
+        "variables": {
+          "dc": [
+            "dc1"
+          ]
+        },
+        "plugins": {
+          "statsd": {
+            "prefix": "artillery.dc1"
+          }
+        }
+      },
+      "dc2": {
+        "target": "http://localhost:4501",
+        "variables": {
+          "dc": [
+            "dc2"
+          ]
+        },
+        "plugins": {
+          "statsd": {
+            "prefix": "artillery.dc2"
+          }
+        }
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "name": "Insert and retrieve",
+      "flow": [
+        {
+          "post": {
+            "url": "/key/{{ dc }}{{ key }}/value/{{ value }}"
+          }
+        },
+        {
+          "get": {
+            "url": "/key/{{ dc }}{{ key }}"
+          }
+        }
+      ]
+    }
+  ]
+}
