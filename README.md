@@ -22,4 +22,4 @@ This [stress test](./stress-test) helps us to understand how Cassandra server/cl
 
 ### Monitoring
 
-And of course we need something to monitor our configuration and [this module](./module/) will help you out with that.
+And of course we need something to monitor our configuration and [this module](./monitor/) will help you out with that.
