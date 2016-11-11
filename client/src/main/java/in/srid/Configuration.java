@@ -21,19 +21,19 @@ class Configuration {
     @Option(name = "-m", usage = "Enable metrics to publish to graphite", metaVar = "boolean")
     boolean metricsEnabled;
 
-    @Option(name = "--ssl", usage = "Enable SSL (two-way authentication)", metaVar = "boolean")
+    @Option(name = "--ssl", usage = "Enable SSL (two-way authentication)", metaVar = "boolean", depends = {"--keystore-path", "--truststore-path", "--keystore-password", "--truststore-password"})
     boolean sslEnabled;
 
-    @Option(name = "--keystore-path", usage = "Keystore path (eg: /tmp/keystore.jks)", metaVar = "string")
+    @Option(name = "--keystore-path", usage = "Keystore path (eg: /tmp/keystore.jks)", metaVar = "string", depends = {"--ssl", "--keystore-password"})
     String keystorePath;
 
-    @Option(name = "--keystore-password", usage = "Keystore password", metaVar = "string")
+    @Option(name = "--keystore-password", usage = "Keystore password", metaVar = "string", depends = {"--ssl", "--keystore-path"})
     String keystorePassword;
 
-    @Option(name = "--truststore-path", usage = "Truststore path (eg: /tmp/truststore.jks)", metaVar = "string")
+    @Option(name = "--truststore-path", usage = "Truststore path (eg: /tmp/truststore.jks)", metaVar = "string", depends = {"--ssl", "--truststore-password"})
     String truststorePath;
 
-    @Option(name = "--truststore-password", usage = "Truststore password", metaVar = "string")
+    @Option(name = "--truststore-password", usage = "Truststore password", metaVar = "string", depends = {"--ssl", "--truststore-path"})
     String truststorePassword;
 
     String keyspaceName = "test_keyspace";
