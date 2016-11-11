@@ -21,6 +21,21 @@ class Configuration {
     @Option(name = "-m", usage = "Enable metrics to publish to graphite", metaVar = "boolean")
     boolean metricsEnabled;
 
+    @Option(name = "--ssl", usage = "Enable SSL (two-way authentication)", metaVar = "boolean")
+    boolean sslEnabled;
+
+    @Option(name = "--keystore-path", usage = "Keystore path (eg: /tmp/keystore.jks)", metaVar = "string")
+    String keystorePath;
+
+    @Option(name = "--keystore-password", usage = "Keystore password", metaVar = "string")
+    String keystorePassword;
+
+    @Option(name = "--truststore-path", usage = "Truststore path (eg: /tmp/truststore.jks)", metaVar = "string")
+    String truststorePath;
+
+    @Option(name = "--truststore-password", usage = "Truststore password", metaVar = "string")
+    String truststorePassword;
+
     String keyspaceName = "test_keyspace";
 
     static Optional<Configuration> get(String... args) {
